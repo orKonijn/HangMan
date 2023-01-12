@@ -10,6 +10,10 @@ class Game {
             alert("not good");
             return this.GetStringFromUser();
         };
+        this.DoubleLetter = () => {
+            alert(`the letter was already in there! please enter a new letter `);
+            return this.GetStringFromUser();
+        };
         this.FindCharLocations = (char, arr) => {
             let locations = [];
             for (let i = 0; i < arr.length; i++) {
@@ -35,10 +39,6 @@ class Game {
         this.HasLetter = (str, letter) => {
             return str.includes(letter);
         };
-        this.DoubleLetter = () => {
-            alert(`the letter was already in there! please enter a new letter `);
-            return this.GetStringFromUser();
-        };
         this.StartProgram = () => {
             let fail = 0;
             let attempts = 0;
@@ -49,7 +49,7 @@ class Game {
             while (fail < 6) {
                 let letter = this.GetStringFromUser();
                 let locations = this.FindCharLocations(letter, letters);
-                locations.forEach(element => {
+                locations.forEach((element) => {
                     encrypt = this.SetCharAt(encrypt, element, letter);
                 });
                 if (locations.length != 0) {

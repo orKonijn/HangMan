@@ -2,11 +2,11 @@ console.log("hi");
 
 
 class Game{
-    constructor(){
 
+    constructor(){
     }
 
-     GetStringFromUser=():string=>{
+    GetStringFromUser=():string=>{
         const letter : string | null = prompt("guess a letter:");
         if(typeof letter == "string"){
             return letter.toLocaleLowerCase();
@@ -14,14 +14,21 @@ class Game{
         alert("not good")
         return this.GetStringFromUser();
     }
-    
-     FindCharLocations=(char:string, arr:string[]) : number[]=> {
+
+    DoubleLetter =():string =>{
+        alert(`the letter was already in there! please enter a new letter `);
+        return this.GetStringFromUser();
+    }
+
+
+    FindCharLocations=(char:string, arr:string[]) : number[]=> {
         let locations = []
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] === char) locations.push(i)
         }
         return locations
     }
+    
     
      BreakTheWordUp=(word:string) : string[]=>{
         return word.toLowerCase().split('');
@@ -48,10 +55,7 @@ class Game{
         return str.includes(letter);
     }  
     
-    DoubleLetter =():string =>{
-        alert(`the letter was already in there! please enter a new letter `);
-        return this.GetStringFromUser();
-    }
+
 
     StartProgram =():void=>{
         let fail =0; 
@@ -64,7 +68,7 @@ class Game{
         while (fail<6){
             let letter =this.GetStringFromUser();
             let locations =this.FindCharLocations(letter,letters);
-            locations.forEach(element => {
+            locations.forEach((element: number) => {
                 encrypt=this.SetCharAt(encrypt,element,letter);
             });
             if(locations.length!=0){
@@ -85,7 +89,6 @@ class Game{
     }
 
 }
-
 
 
 
