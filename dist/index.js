@@ -5,7 +5,7 @@ class Game {
         this.GetStringFromUser = () => {
             const letter = prompt("guess a letter:");
             if (typeof letter == "string") {
-                return letter;
+                return letter.toLocaleLowerCase();
             }
             alert("not good");
             return this.GetStringFromUser();
@@ -32,34 +32,36 @@ class Game {
         this.WinCondition = (str) => {
             return str.includes("*");
         };
-        this.HasLetter = (str, letter) => str.includes(letter);
+        this.HasLetter = (str, letter) => {
+            return str.includes(letter);
+        };
         this.DoubleLetter = () => {
             alert(`the letter was already in there! please enter a new letter `);
             return this.GetStringFromUser();
         };
-        this.Startprogram = () => {
+        this.StartProgram = () => {
             let fail = 0;
             let attempts = 0;
             const word = "or konijn";
-            let Encrypt = this.MaskString(word);
+            let encrypt = this.MaskString(word);
             let letters = this.BreakTheWordUp(word);
             console.log(letters);
             while (fail < 6) {
                 let letter = this.GetStringFromUser();
                 let locations = this.FindCharLocations(letter, letters);
                 locations.forEach(element => {
-                    Encrypt = this.SetCharAt(Encrypt, element, letter);
+                    encrypt = this.SetCharAt(encrypt, element, letter);
                 });
                 if (locations.length != 0) {
-                    alert(`It worked!! the word looks like ${Encrypt} `);
+                    alert(`It worked!! the word looks like ${encrypt} `);
                 }
                 else {
                     fail++;
                     alert(`Im sorry it didnt Work. the number of fail is ${fail} `);
                 }
             }
-            if (this.WinCondition(Encrypt)) {
-                alert(`Game finished you won!! the word was ${Encrypt} `);
+            if (this.WinCondition(encrypt)) {
+                alert(`Game finished you won!! the word was ${encrypt} `);
             }
             else {
                 alert(`sorry but you lost, the word was ${word} `);
@@ -68,4 +70,4 @@ class Game {
     }
 }
 let games = new Game();
-games.Startprogram();
+games.StartProgram();
